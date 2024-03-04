@@ -1,0 +1,41 @@
+{
+  "entityType" : "ASSET",
+  "entity" : {
+    "additionalInfo" : {
+      "description" : ""
+    },
+    "assetProfileId" : {
+      "entityType" : "ASSET_PROFILE",
+      "id" : "84622e10-da5b-11ee-880e-ed784018c015"
+    },
+    "customerId" : {
+      "entityType" : "CUSTOMER",
+      "id" : "13814000-1dd2-11b2-8080-808080808080"
+    },
+    "externalId" : null,
+    "id" : {
+      "entityType" : "ASSET",
+      "id" : "674d2e80-da59-11ee-880e-ed784018c015"
+    },
+    "label" : null,
+    "name" : "Dispositivos",
+    "ownerId" : null,
+    "type" : "Sucursal"
+  },
+  "relations" : [ {
+    "additionalInfo" : null,
+    "from" : {
+      "entityType" : "ASSET",
+      "id" : "674d2e80-da59-11ee-880e-ed784018c015"
+    },
+    "to" : {
+      "entityType" : "DEVICE",
+      "id" : "519cdaf0-d661-11ee-880e-ed784018c015"
+    },
+    "type" : "Contains",
+    "typeGroup" : "COMMON"
+  } ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ ]
+  }
+}

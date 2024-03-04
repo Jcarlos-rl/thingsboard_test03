@@ -1,0 +1,175 @@
+{
+  "entityType" : "DEVICE",
+  "entity" : {
+    "additionalInfo" : {
+      "gateway" : false,
+      "overwriteActivityTime" : false,
+      "description" : ""
+    },
+    "customerId" : {
+      "entityType" : "CUSTOMER",
+      "id" : "13814000-1dd2-11b2-8080-808080808080"
+    },
+    "deviceData" : {
+      "configuration" : {
+        "type" : "DEFAULT"
+      },
+      "transportConfiguration" : {
+        "type" : "DEFAULT"
+      }
+    },
+    "deviceProfileId" : {
+      "entityType" : "DEVICE_PROFILE",
+      "id" : "637b9260-d64e-11ee-880e-ed784018c015"
+    },
+    "externalId" : null,
+    "firmwareId" : null,
+    "id" : {
+      "entityType" : "DEVICE",
+      "id" : "453f17e0-d64e-11ee-880e-ed784018c015"
+    },
+    "label" : "",
+    "name" : "Net21",
+    "ownerId" : null,
+    "softwareId" : null,
+    "type" : "NET21"
+  },
+  "credentials" : {
+    "credentialsId" : "gIXekZfDpBnWgfzGEN00",
+    "credentialsType" : "ACCESS_TOKEN",
+    "credentialsValue" : null
+  },
+  "relations" : [ ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ {
+      "booleanValue" : false,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "active",
+      "lastUpdateTs" : 1709387370724,
+      "longValue" : null,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "inactivityAlarmTime",
+      "lastUpdateTs" : 1709387370733,
+      "longValue" : 1709387370724,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "lastActivityTime",
+      "lastUpdateTs" : 1709386724579,
+      "longValue" : 1709386723485,
+      "strValue" : null
+    } ],
+    "SHARED_SCOPE" : [ {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "A0ad",
+      "lastUpdateTs" : 1709238076670,
+      "longValue" : 0,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "A0bd",
+      "lastUpdateTs" : 1709241907993,
+      "longValue" : 77,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C0ad",
+      "lastUpdateTs" : 1709238166495,
+      "longValue" : 20,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C0bd",
+      "lastUpdateTs" : 1709241917377,
+      "longValue" : 77,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C1ad",
+      "lastUpdateTs" : 1709238274430,
+      "longValue" : 21,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C1bd",
+      "lastUpdateTs" : 1709241928115,
+      "longValue" : 77,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C2ad",
+      "lastUpdateTs" : 1709238303415,
+      "longValue" : 22,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C2bd",
+      "lastUpdateTs" : 1709242037505,
+      "longValue" : 77,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C3ad",
+      "lastUpdateTs" : 1709238341107,
+      "longValue" : 23,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "C3bd",
+      "lastUpdateTs" : 1709242031809,
+      "longValue" : 77,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "D0ad",
+      "lastUpdateTs" : 1709238396041,
+      "longValue" : 0,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "D0bd",
+      "lastUpdateTs" : 1709242056340,
+      "longValue" : 77,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "DE",
+      "lastUpdateTs" : 1709238456603,
+      "longValue" : 1,
+      "strValue" : null
+    } ]
+  }
+}

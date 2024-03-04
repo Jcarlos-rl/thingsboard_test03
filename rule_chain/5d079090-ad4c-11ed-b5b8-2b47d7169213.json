@@ -1,0 +1,795 @@
+{
+  "entityType" : "RULE_CHAIN",
+  "entity" : {
+    "additionalInfo" : {
+      "description" : "En esta cadena de regla se incluye todo lo relacionado con la lógica para generar alarmas."
+    },
+    "configuration" : null,
+    "debugMode" : false,
+    "externalId" : {
+      "entityType" : "RULE_CHAIN",
+      "id" : "5d079090-ad4c-11ed-b5b8-2b47d7169213"
+    },
+    "firstRuleNodeId" : {
+      "entityType" : "RULE_NODE",
+      "id" : "3e59e730-da67-11ee-880e-ed784018c015"
+    },
+    "id" : {
+      "entityType" : "RULE_CHAIN",
+      "id" : "5d079090-ad4c-11ed-b5b8-2b47d7169213"
+    },
+    "name" : "alarmas",
+    "root" : false,
+    "type" : "CORE"
+  },
+  "metaData" : {
+    "connections" : [ {
+      "fromIndex" : 3,
+      "toIndex" : 4,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 5,
+      "type" : "Temperatura o humedad fuera de rango"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 6,
+      "type" : "Temperatura y humedad dentro de rango"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 7,
+      "type" : "Puerta abierta"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 8,
+      "type" : "Puerta cerrada"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 9,
+      "type" : "Liquidos Alarma"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 10,
+      "type" : "Liquidos OK"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 11,
+      "type" : "CFE Alarma"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 12,
+      "type" : "CFE OK"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 13,
+      "type" : "UPS Alarma"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 14,
+      "type" : "UPS OK"
+    }, {
+      "fromIndex" : 5,
+      "toIndex" : 15,
+      "type" : "Created"
+    }, {
+      "fromIndex" : 6,
+      "toIndex" : 15,
+      "type" : "Cleared"
+    }, {
+      "fromIndex" : 7,
+      "toIndex" : 15,
+      "type" : "Created"
+    }, {
+      "fromIndex" : 8,
+      "toIndex" : 15,
+      "type" : "Cleared"
+    }, {
+      "fromIndex" : 9,
+      "toIndex" : 15,
+      "type" : "Created"
+    }, {
+      "fromIndex" : 10,
+      "toIndex" : 15,
+      "type" : "Cleared"
+    }, {
+      "fromIndex" : 11,
+      "toIndex" : 15,
+      "type" : "Created"
+    }, {
+      "fromIndex" : 12,
+      "toIndex" : 15,
+      "type" : "Cleared"
+    }, {
+      "fromIndex" : 13,
+      "toIndex" : 15,
+      "type" : "Created"
+    }, {
+      "fromIndex" : 14,
+      "toIndex" : 15,
+      "type" : "Cleared"
+    }, {
+      "fromIndex" : 17,
+      "toIndex" : 18,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 17,
+      "toIndex" : 21,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 18,
+      "toIndex" : 19,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 20,
+      "toIndex" : 17,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 21,
+      "toIndex" : 22,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 22,
+      "toIndex" : 2,
+      "type" : "Success"
+    } ],
+    "firstNodeIndex" : 20,
+    "nodes" : [ {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 316,
+        "layoutY" : 69
+      },
+      "configuration" : {
+        "tellFailureIfAbsent" : true,
+        "clientAttributeNames" : [ ],
+        "sharedAttributeNames" : [ ],
+        "serverAttributeNames" : [ ],
+        "latestTsKeyNames" : [ "S1_TH_001_temperature", "S1_TH_001_humidity", "S4_CFE_003_uninstalled", "S4_CFE_003_unlocked", "S4_UPS_004_uninstalled", "S4_UPS_004_unlocked", "S4_Liquidos_002_uninstalled", "S4_Liquidos_002_unlocked", "S4_Puerta_001_unlocked", "S4_Puerta_001_uninstalled" ],
+        "getLatestValueWithTs" : false,
+        "fetchTo" : "METADATA"
+      },
+      "configurationVersion" : 1,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e301810-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "estadoSucursal",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.metadata.TbGetAttributesNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "Revise todas las variables de una sucursal. Si alguna no está en rango, manda la variable estado a \"alarma\" de lo contrario, lo manda a \"OK\"",
+        "layoutX" : 319,
+        "layoutY" : 10
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "//Este script nos permite conocer el estado de la sucursal, alarmada o ok por medio de comparar todas las variables del sitio.\n\n//Separamos primero todas las variables \n\n\nif (metadata.S1_TH_001_temperature < 26 && metadata.S1_TH_001_temperature > 0 && metadata.S1_TH_001_humidity > 20 && metadata.S1_TH_001_humidity < 60 && !!metadata.S4_CFE_003_uninstalled && !!metadata.S4_CFE_003_unlocked && !!metadata.S4_Liquidos_002_uninstalled && !!metadata.S4_Liquidos_002_unlocked && !!metadata.S4_Puerta_001_uninstalled && !!metadata.S4_Puerta_001_unlocked && !!metadata.S4_UPS_004_uninstalled && !!metadata.S4_UPS_004_unlocked){\n    var newMsg = {\n        estado: \"OK\"\n    };\n}else{\n    var newMsg = {\n    estado: \"Alarma\"\n    };\n}\n\n    var NewMetadata = {\n        deviceName: metadata.deviceName,\n        deviceType: metadata.deviceType,\n        ts: metadata.ts\n    };\n    \nreturn {msg: newMsg, metadata: NewMetadata, msgType: msgType};",
+        "tbelScript" : "return {msg: msg, metadata: metadata, msgType: msgType};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e319eb0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "estadoSucursal",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1047,
+        "layoutY" : 68
+      },
+      "configuration" : {
+        "defaultTTL" : 0,
+        "skipLatestPersistence" : false,
+        "useServerTs" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e32d730-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "guardarEstadoSucursal",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "Este script recibe información de los sensores y los procesa para identificar las alarmas. Toma los umbrales de variables que están alojadas a nivel activo en el servidor, y las compara contra los valores que recibe. Genera además un nuevo campo para cada variable: Temperatura, Humedad, Puerta, Líquidos, CFE y UPS. A estos les asigna un texto que indica cuál es el error. Posteriormente compara estas telemetrías para saber si el sitio (activo) tiene alguna falla que reportar.",
+        "layoutX" : 506,
+        "layoutY" : 507
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "// Identificamos el tipo de sensor que recibimos. Existen: TH, Puerta, Líqudios, CFE y UPS. Para esto, separamos el nombre de una lectura y la separamos por los guiones bajos. Vamos a tomar la primera que recibimos. Después de separarla, revisamos a qué tipo corresponde. Ejemplo: S4_Liquidos_002_rssi. Si la separamos con \"_\", quedaría [{S4},{Liquidos},{002},{rssi}]. Aquí comparamos la segunda, que es \"Líquidos\". Esto lo hacemos con el siguiente código: Object.keys(msg)[0].split(\"_\")[1]\n\n//ES IMPORTANTE CONSIDERAR QUE ESTO FUNCIONA SIEMPRE QUE SE MANTENGA EL NOMBRE DE LAS LLAVES DE LA MISMA MANERA, POR LO QUE PUEDE SER QUE PARA ESTE CLIENTE FUNCIONE ADECUADAMENTE, PERO QUE PARA OTROS CLIENTES CON OTROS SENSORES, ESTO NO FUNCIONE.\n//Utilizamos el msgType para identificar qué tipo de alarma vamos a lanzar posteriormente. En la parte del mensaje, ponemos la información relevante para generar y entender el mensaje de alarma.\n\nvar newMsg;\nvar newMsgType;\nvar umbralTemperaturaAlto = 26;\nvar umbralTemperaturaBajo = 10;\nvar umbralHumedadAlto = 60;\nvar umbralHumedadBajo = 20;\n\n\nswitch (Object.keys(msg)[0].split(\"_\")[1]) {\n    case 'TH':\n        //Si es TH, necesitamos comparar tanto la temperatura como la humedad. Lo hacemos directamente con las llaves.\n        var varEstadoTemperatura, varEstadoHumedad;\n        //Comparamos la temperatura con los límites.\n        if (msg.S1_TH_001_temperature > umbralTemperaturaAlto) {\n            varEstadoTemperatura =\n                \"Temperatura arriba de rango\";\n        } else if (msg.S1_TH_001_temperature < umbralTemperaturaBajo) {\n            varEstadoTemperatura =\n                \"Temperatura abajo de rango\";\n        } else {\n            varEstadoTemperatura = \"Temperatura en rango\";\n        }\n        //Comparamos la humedad con los límites.\n        if (msg.S1_TH_001_humidity > umbralHumedadAlto) {\n            varEstadoHumedad = \"Humedad arriba de rango\";\n        } else if (msg.S1_TH_001_humidity < umbralHumedadBajo) {\n            varEstadoHumedad = \"Humedad abajo de rango\";\n        } else {\n            varEstadoHumedad = \"Humedad en rango\";\n        }\n        \n        if(varEstadoTemperatura == \"Temperatura en rango\" && varEstadoHumedad == \"Humedad en rango\"){\n            newMsgType = \"Temperatura y humedad dentro de rango\";\n        } else {\n            newMsgType = \"Temperatura o humedad fuera de rango\";\n        }\n        \n            \n        newMsg = {\n            EstadoTemperatura: varEstadoTemperatura,\n            EstadoHumedad: varEstadoHumedad,\n            Temperatura: msg.S1_TH_001_temperature,\n            Humedad: msg.S1_TH_001_humidity,\n            UmbralSuperiorTemperatura: umbralTemperaturaAlto,\n            UmbralInferiorTemperatura: umbralTemperaturaBajo,\n            UmbraSuperiorHumedad: umbralHumedadAlto,\n            UmbralInferiorHumedad: umbralHumedadBajo\n        };\n        break;\n        \n    case 'Puerta':\n        msg.S4_Puerta_001_unlocked ?\n            newMsgType = \"Puerta abierta\" : newMsgType = \"Puerta cerrada\";\n        newMsg = {\n            EstadoPuerta: newMsgType\n        };\n        break;\n        \n    case 'Liquidos':\n        msg.S4_Liquidos_002_uninstalled ? newMsgType = \"Liquidos OK\" :\n            newMsgType = \"Liquidos Alarma\";\n            newMsg = {\n                EstadoLiquidos: newMsgType\n            };\n        break;\n        \n    case 'CFE':\n        msg.S4_CFE_003_uninstalled ?\n            newMsgType = \"CFE OK\" : newMsgType = \"CFE Alarma\";\n            newMsg = {\n                EstadoCFE: newMsgType\n            };\n            \n        break;\n        \n    case 'UPS':\n        msg.S4_UPS_004_uninstalled ?\n            newMsgType = \"UPS OK\" : newMsgType = \"UPS Alarma\";\n            newMsg = {\n                EstadoUPS: newMsgType\n            };\n        break;\n        \n    default:\n    newMsgType = \"Error\"\n}\n\nvar newMetadata = {\n    deviceName: metadata.deviceName,\n    deviceType: metadata.deviceType,\n    ts: metadata.ts\n};\n\nreturn {\n    msg: newMsg,\n    metadata: newMetadata,\n    msgType: newMsgType\n};",
+        "tbelScript" : "return {msg: msg, metadata: metadata, msgType: msgType};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e398df0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "generacionAlarmas",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 835,
+        "layoutY" : 504
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "return msgType;",
+        "tbelScript" : "function nextRelation(metadata, msg) {\n    return ['one','nine'];\n}\nif(msgType == 'POST_TELEMETRY_REQUEST') {\n    return ['two'];\n}\nreturn nextRelation(metadata, msg);"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e3e21d0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "tipoAlarma",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.filter.TbJsSwitchNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1193,
+        "layoutY" : 220
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "useMessageAlarmData" : false,
+        "overwriteAlarmDetails" : false,
+        "alarmType" : "Temperatura o Humedad fuera de rango",
+        "severity" : "CRITICAL",
+        "propagate" : false,
+        "relationTypes" : [ ],
+        "propagateToOwner" : false,
+        "propagateToOwnerHierarchy" : false,
+        "propagateToTenant" : false,
+        "dynamicSeverity" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e3ff690-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "alarmaTemperaturaHumedad",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbCreateAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1190,
+        "layoutY" : 296
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmType" : "Temperatura o Humedad fuera de rango"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e42b5b0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "clearTemperaturaHumedad",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbClearAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1192,
+        "layoutY" : 452
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "useMessageAlarmData" : false,
+        "overwriteAlarmDetails" : false,
+        "alarmType" : "alarmaPuerta",
+        "severity" : "CRITICAL",
+        "propagate" : false,
+        "relationTypes" : [ ],
+        "propagateToOwner" : false,
+        "propagateToOwnerHierarchy" : false,
+        "propagateToTenant" : false,
+        "dynamicSeverity" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e454dc0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "alarmaPuerta",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbCreateAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1196,
+        "layoutY" : 512
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmType" : "alarmaPuerta"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e45ea00-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "clearPuerta",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbClearAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1206,
+        "layoutY" : 593
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "useMessageAlarmData" : false,
+        "overwriteAlarmDetails" : false,
+        "alarmType" : "liquidosAlarma",
+        "severity" : "CRITICAL",
+        "propagate" : false,
+        "relationTypes" : [ ],
+        "propagateToOwner" : false,
+        "propagateToOwnerHierarchy" : false,
+        "propagateToTenant" : false,
+        "dynamicSeverity" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e46ad50-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "liquidosAlarma",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbCreateAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1210,
+        "layoutY" : 651
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmType" : "liquidosAlarma"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e480ce0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "clearLiquidos",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbClearAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1208,
+        "layoutY" : 724
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "useMessageAlarmData" : false,
+        "overwriteAlarmDetails" : false,
+        "alarmType" : "cfeAlarma",
+        "severity" : "CRITICAL",
+        "propagate" : false,
+        "relationTypes" : [ ],
+        "propagateToOwner" : false,
+        "propagateToOwnerHierarchy" : false,
+        "propagateToTenant" : false,
+        "dynamicSeverity" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e4a2fc0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "cfeAlarma",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbCreateAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1215,
+        "layoutY" : 776
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmType" : "cfeAlarma"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e4b8f50-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "clearCFE",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbClearAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1218,
+        "layoutY" : 841
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "useMessageAlarmData" : false,
+        "overwriteAlarmDetails" : false,
+        "alarmType" : "upsAlarma",
+        "severity" : "CRITICAL",
+        "propagate" : false,
+        "relationTypes" : [ ],
+        "propagateToOwner" : false,
+        "propagateToOwnerHierarchy" : false,
+        "propagateToTenant" : false,
+        "dynamicSeverity" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e4d15f0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "upsAlarma",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbCreateAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1219,
+        "layoutY" : 891
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "alarmDetailsBuildJs" : "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmDetailsBuildTbel" : "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+        "alarmType" : "upsAlarma"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e4eeab0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "clearUPS",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbClearAlarmNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1524,
+        "layoutY" : 491
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "//Convertimos los timestamp a valores tipo fecha - hora.\nvar startTs_dt = new Date(msg.startTs - 21600000); // Tuve que restar 6 horas porque no encontré manera de cambiar el TimeZone.\nvar cleared = \"\";\nif (msg.clearTs > msg.startTs){\nvar clearTs_dt = new Date(msg.clearTs - 21600000); //Tuve que restar 6 horas porque no encontré manera de cambiar el TimeZone.\nvar duracion = (msg.clearTs - msg.startTs)/60000;\n\ncleared = (msg.status.split(\"_\")[0] == 'CLEARED') ?  \" Fin: \" + clearTs_dt.toLocaleDateString() + \" \" + clearTs_dt.toLocaleTimeString() + \" Duración: \" + duracion.toFixed(0) + \" minutos\": \"\";\n}\n//Aquí se hace la comparación de todos los estados posibles.\n\n        if(msg.status.split(\"_\")[0] == 'ACTIVE'){\n            msg.tiempo = \" Inicio: \" + startTs_dt.toLocaleDateString() + \" \" + startTs_dt.toLocaleTimeString();\n            msg.alarma = \"Alarma: \";\n        }else if(msg.status.split(\"_\")[0] == 'CLEARED'){\n            msg.alarma = \"Restableció: \";\n            msg.tiempo = \"Inicio: \" + startTs_dt.toLocaleDateString() + \" \" + startTs_dt.toLocaleTimeString() + cleared;\n        }\n    \n\nmsg.text = msg.alarma + \" \" + msg.type + \" en \" + metadata.deviceName + \" \" + msg.tiempo;\nmsg.chat_id = -1001867695948;\n\nreturn {msg: msg, metadata: metadata, msgType: msgType};",
+        "tbelScript" : "return {msg: msg, metadata: metadata, msgType: msgType};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e507150-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "Envío Alarma Telegram",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 710,
+        "layoutY" : 200
+      },
+      "configuration" : {
+        "restEndpointUrlPattern" : "https://api.telegram.org/bot6067868036:AAGvPq2itCm4vP0Mn51YQ1rO-Xx03YjQOdc/sendMessage",
+        "requestMethod" : "POST",
+        "useSimpleClientHttpFactory" : false,
+        "ignoreRequestBody" : false,
+        "enableProxy" : false,
+        "useSystemProxyProperties" : false,
+        "proxyScheme" : null,
+        "proxyHost" : null,
+        "proxyPort" : 0,
+        "proxyUser" : null,
+        "proxyPassword" : null,
+        "readTimeoutMs" : 0,
+        "maxParallelRequestsCount" : 0,
+        "headers" : {
+          "Content-Type" : "application/json"
+        },
+        "useRedisQueueForMsgPersistence" : false,
+        "trimQueue" : false,
+        "maxQueueSize" : 0,
+        "credentials" : {
+          "type" : "anonymous"
+        }
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : true,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e51d0e0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "Alarma Telegram",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.rest.TbRestApiCallNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 354,
+        "layoutY" : 201
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "/* Clasificamos el tipo de alarmas y sobre eso mandamos información tanto para el subject del correo como para el texto.\n */\n\n//Convertimos los timestamp a valores tipo fecha - hora.\nvar startTs_dt = new Date(msg.startTs -\n21600000); // Tuve que restar 6 horas porque no encontré manera de cambiar el TimeZone.\nvar cleared = \"\";\nif (msg.clearTs > msg.startTs) {\n    var clearTs_dt = new Date(msg.clearTs -\n    21600000); //Tuve que restar 6 horas porque no encontré manera de cambiar el TimeZone.\n    var duracion = (msg.clearTs - msg.startTs) / 60000;\n}\ncleared = (msg.status.split(\"_\")[0] == 'CLEARED') ?\n    \" Fin: \" + clearTs_dt.toLocaleDateString() + \" \" +\n    clearTs_dt.toLocaleTimeString() + \" Duración: \" +\n    duracion.toFixed(0) + \" minutos\" : \"\";\n\nvar newMsg = {};\n\n\nif (msg.name.split(\" - \")[0] != \"[E0]\") {\n    newMsg.estatus = msg.status.split(\"_\")[0] == \"ACTIVE\" ? \"Alarma de \" : \"Se restablecio alarma de \";\n    newMsg.estado = msg.status.split(\"_\")[0] == \"ACTIVE\" ? \"0\" : \"1\";\n    //Definimos si se limpió o activó la alarma.\n\n    newMsg.mensaje = msg.name.split(\" - \")[1]; //Nos quedamos únicamente con la segunda parte del a alarma que es la descripción.\n\n}else if (msg.name.split(\" - \")[0] == \"[E0]\"){\n    newMsg.estatus = msg.status.split(\"_\")[0] == \"ACTIVE\" ? \"Error de sensor \" : \"Sensor en linea \";\n    newMsg.mensaje = \"\";\n    \n    \n}\n\n    newMsg.sitio = metadata.deviceName.split(\"_\").slice(1).join(\"_\"); //Tomamos del deviceName el sitio. Este comando elimina el primer elemento G1.\n\nswitch (msg.name.split(\" - \")[0]){\n    //Sensor de temperatura humedad 1\n    case \"[TA]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura + \" °C. Umbral superior en 26 °C\";\n        break;\n    case \"[TB]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura + \" °C. Umbral inferior en 10 °C\";\n        break;\n    case \"[HA]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad + \" %HR. Umbral superior en 75 %HR\";\n        break;\n    case \"[HB]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad + \" %HR. Umbral inferior en 25 %HR\";\n        break;\n    //Sensor de temperatura humedad 2    \n        case \"[TA2]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura2 + \" °C. Umbral superior en 26 °C\";\n        break;\n    case \"[TB2]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura2 + \" °C. Umbral inferior en 10 °C\";\n        break;\n    case \"[HA2]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad2 + \" %HR. Umbral superior en 75 %HR\";\n        break;\n    case \"[HB2]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad2 + \" %HR. Umbral inferior en 25 %HR\";\n        break;\n        //Sensor de temperatura humedad 3\n        case \"[TA3]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura3 + \" °C. Umbral superior en 26 °C\";\n        break;\n    case \"[TB3]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura3 + \" °C. Umbral inferior en 10 °C\";\n        break;\n    case \"[HA3]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad3 + \" %HR. Umbral superior en 75 %HR\";\n        break;\n    case \"[HB3]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad3 + \" %HR. Umbral inferior en 25 %HR\";\n        break;\n//Sensor de temperatura humedad 4        \n        case \"[TA4]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura4 + \" °C. Umbral superior en 26 °C\";\n        break;\n    case \"[TB4]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura4 + \" °C. Umbral inferior en 10 °C\";\n        break;\n    case \"[HA4]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad4 + \" %HR. Umbral superior en 75 %HR\";\n        break;\n    case \"[HB4]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad4 + \" %HR. Umbral inferior en 25 %HR\";\n        break;\n        //Sensor de temperatura humedad 5\n        case \"[TA5]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura5 + \" °C. Umbral superior en 26 °C\";\n        break;\n    case \"[TB5]\":\n        newMsg.datos = \"Temperatura en: \" + metadata.temperatura5 + \" °C. Umbral inferior en 10 °C\";\n        break;\n    case \"[HA5]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad5 + \" %HR. Umbral superior en 75 %HR\";\n        break;\n    case \"[HB5]\":\n        newMsg.datos = \"Humedad en: \" + metadata.humedad5 + \" %HR. Umbral inferior en 25 %HR\";\n        break;\n        \n    case \"[E0]\":\n        break;\n    default:\n        newMsg.datos = \"\";\n}\n   \n\n    \n    //Para los SMS.\n    /*newMsg.sms = newMsg.estatus + newMsg.mensaje + \" en \" + newMsg.sitio + \". \" + \"Inicio: \" + startTs_dt.toLocaleDateString() + \" \" + startTs_dt.toLocaleTimeString() + cleared;\n    newMsg.numeroSMS = \"\";*/\n    \n    \n    //Para Telegram.\n    newMsg.text = newMsg.estatus + newMsg.mensaje + \" en \" + newMsg.sitio + \". \" + newMsg.datos + \". Inicio: \" + startTs_dt.toLocaleDateString() + \" \" + startTs_dt.toLocaleTimeString() + cleared;\n    newMsg.chat_id = \"+Hc8Mr_1H3qthOGYx\";\n    \n    //Para email\n    newMsg.correos = \"juan.romero@tesamerica.com.mx\";\n    newMsg.correos_cc = \"\";\n    newMsg.correos_bcc = \"\";\n    newMsg.subject = newMsg.estatus + newMsg.mensaje + \" en \" + newMsg.sitio;\n    newMsg.body = newMsg.estatus + newMsg.mensaje + \" en \" + newMsg.sitio + \". \" + newMsg.datos + \". Inicio: \" + startTs_dt.toLocaleDateString() + \" \" + startTs_dt.toLocaleTimeString() + cleared;\n\n    return {\n        msg: newMsg,\n        metadata: metadata,\n        msgType: msgType\n    };",
+        "tbelScript" : "return {msg: msg, metadata: metadata, msgType: msgType};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e537e90-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "envioAlarmas",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 511,
+        "layoutY" : 338
+      },
+      "configuration" : {
+        "fromTemplate" : "sender@tkmecloud.io",
+        "toTemplate" : "$[correos]",
+        "ccTemplate" : "$[correos_cc]",
+        "bccTemplate" : "$[correos_bcc]",
+        "subjectTemplate" : "$[subject]",
+        "mailBodyType" : "false",
+        "isHtmlTemplate" : null,
+        "bodyTemplate" : "$[body]"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e5468f0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "envioMailAlarmas",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.mail.TbMsgToEmailNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 794,
+        "layoutY" : 338
+      },
+      "configuration" : {
+        "useSystemSmtpSettings" : true,
+        "smtpHost" : "localhost",
+        "smtpPort" : 25,
+        "username" : null,
+        "password" : null,
+        "smtpProtocol" : "smtp",
+        "timeout" : 10000,
+        "enableTls" : false,
+        "tlsVersion" : "TLSv1.2",
+        "enableProxy" : false,
+        "proxyHost" : null,
+        "proxyPort" : null,
+        "proxyUser" : null,
+        "proxyPassword" : null
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e5616a0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "envioAlarmas",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.mail.TbSendEmailNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 16,
+        "layoutY" : 314
+      },
+      "configuration" : {
+        "relationsQuery" : {
+          "fetchLastLevelOnly" : false,
+          "direction" : "TO",
+          "maxLevel" : 1,
+          "filters" : [ {
+            "relationType" : "Contains",
+            "entityTypes" : [ "ASSET" ]
+          } ]
+        },
+        "dataMapping" : {
+          "S1_TH_001_temperature" : "temperatura",
+          "S1_TH_001_humidity" : "humedad",
+          "S1_TH_002_temperature" : "temperatura2",
+          "S1_TH_002_humidity" : "humedad2",
+          "S1_TH_003_temperature" : "temperatura3",
+          "S1_TH_003_humidity" : "humedad3",
+          "S1_TH_004_temperature" : "temperatura4",
+          "S1_TH_004_humidity" : "humedad4",
+          "S1_TH_005_temperature" : "temperatura5",
+          "S1_TH_005_humidity" : "humedad5"
+        },
+        "dataToFetch" : "LATEST_TELEMETRY",
+        "fetchTo" : "METADATA"
+      },
+      "configurationVersion" : 1,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e59e730-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "datosSitio",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.metadata.TbGetRelatedAttributeNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 550,
+        "layoutY" : 70
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "jsScript" : "return {msg: msg, metadata: metadata, msgType: msgType};",
+        "tbelScript" : "var newMsg = {\n    estado: msg.estado\n};\n\nreturn {msg: newMsg, metadata: metadata, msgType: \"POST_TELEMETRY_REQUEST\"};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e5b1fb0-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "envioEstado",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "Enviamos el Estado al Activo.",
+        "layoutX" : 798,
+        "layoutY" : 130
+      },
+      "configuration" : {
+        "originatorSource" : "RELATED",
+        "entityType" : null,
+        "entityNamePattern" : null,
+        "relationsQuery" : {
+          "fetchLastLevelOnly" : false,
+          "direction" : "TO",
+          "maxLevel" : 1,
+          "filters" : [ {
+            "relationType" : "Contains",
+            "entityTypes" : [ "ASSET" ]
+          } ]
+        }
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "3e5ca650-da67-11ee-880e-ed784018c015"
+      },
+      "name" : "convertirActivoAlarma",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode"
+    } ],
+    "ruleChainConnections" : null
+  },
+  "relations" : [ ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ ]
+  }
+}

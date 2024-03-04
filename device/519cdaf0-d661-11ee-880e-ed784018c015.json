@@ -1,0 +1,123 @@
+{
+  "entityType" : "DEVICE",
+  "entity" : {
+    "additionalInfo" : {
+      "gateway" : false,
+      "overwriteActivityTime" : false,
+      "description" : ""
+    },
+    "customerId" : {
+      "entityType" : "CUSTOMER",
+      "id" : "13814000-1dd2-11b2-8080-808080808080"
+    },
+    "deviceData" : {
+      "configuration" : {
+        "type" : "DEFAULT"
+      },
+      "transportConfiguration" : {
+        "type" : "DEFAULT"
+      }
+    },
+    "deviceProfileId" : {
+      "entityType" : "DEVICE_PROFILE",
+      "id" : "a69b68c0-da47-11ee-880e-ed784018c015"
+    },
+    "externalId" : null,
+    "firmwareId" : null,
+    "id" : {
+      "entityType" : "DEVICE",
+      "id" : "519cdaf0-d661-11ee-880e-ed784018c015"
+    },
+    "label" : "",
+    "name" : "iBeacon",
+    "ownerId" : null,
+    "softwareId" : null,
+    "type" : "iBeacon"
+  },
+  "credentials" : {
+    "credentialsId" : "824d91dc7498b93a5a6bd7d13c93cc69c3d67fcdf5ca6a8d6608c0b62a139d9f",
+    "credentialsType" : "MQTT_BASIC",
+    "credentialsValue" : "{\"clientId\":\"arr216xqd9j4hru7dl6p\",\"userName\":\"j7olpfalgejhg5mra2i7\",\"password\":\"fbktcdz3rgxsdrmz0ikn\"}"
+  },
+  "relations" : [ {
+    "additionalInfo" : null,
+    "from" : {
+      "entityType" : "ASSET",
+      "id" : "674d2e80-da59-11ee-880e-ed784018c015"
+    },
+    "to" : {
+      "entityType" : "DEVICE",
+      "id" : "519cdaf0-d661-11ee-880e-ed784018c015"
+    },
+    "type" : "Contains",
+    "typeGroup" : "COMMON"
+  } ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ {
+      "booleanValue" : true,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "active",
+      "lastUpdateTs" : 1709221219514,
+      "longValue" : null,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "inactivityAlarmTime",
+      "lastUpdateTs" : 1709143049206,
+      "longValue" : 1709143049204,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "lastActivityTime",
+      "lastUpdateTs" : 1709591321584,
+      "longValue" : 1709591321561,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "lastConnectTime",
+      "lastUpdateTs" : 1709589915257,
+      "longValue" : 1709589915257,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "lastDisconnectTime",
+      "lastUpdateTs" : 1709589914212,
+      "longValue" : 1709589914212,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "macDispositivo1",
+      "lastUpdateTs" : 1709570867948,
+      "longValue" : null,
+      "strValue" : "AC233FAA46EA"
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "macDispositivo2",
+      "lastUpdateTs" : 1709570883184,
+      "longValue" : null,
+      "strValue" : "C3000001E2A7"
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "macDispositivo3",
+      "lastUpdateTs" : 1709570892194,
+      "longValue" : null,
+      "strValue" : "C300000AE787"
+    } ],
+    "SHARED_SCOPE" : [ ]
+  }
+}
