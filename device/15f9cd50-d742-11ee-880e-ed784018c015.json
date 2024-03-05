@@ -20,7 +20,7 @@
     },
     "deviceProfileId" : {
       "entityType" : "DEVICE_PROFILE",
-      "id" : "23ea0b80-d73a-11ee-880e-ed784018c015"
+      "id" : "3f0b7a90-da80-11ee-880e-ed784018c015"
     },
     "externalId" : null,
     "firmwareId" : null,
@@ -32,7 +32,7 @@
     "name" : "SALIDA UPS 1",
     "ownerId" : null,
     "softwareId" : null,
-    "type" : "CPM 20"
+    "type" : "UPS_CPM"
   },
   "credentials" : {
     "credentialsId" : "gIXekZfDpBnWgfzCPM02",
@@ -42,11 +42,11 @@
   "relations" : [ ],
   "attributes" : {
     "SERVER_SCOPE" : [ {
-      "booleanValue" : false,
+      "booleanValue" : true,
       "doubleValue" : null,
       "jsonValue" : null,
       "key" : "active",
-      "lastUpdateTs" : 1709387490736,
+      "lastUpdateTs" : 1709594909593,
       "longValue" : null,
       "strValue" : null
     }, {
@@ -62,8 +62,8 @@
       "doubleValue" : null,
       "jsonValue" : null,
       "key" : "lastActivityTime",
-      "lastUpdateTs" : 1709386844589,
-      "longValue" : 1709386843111,
+      "lastUpdateTs" : 1709597585582,
+      "longValue" : 1709597584049,
       "strValue" : null
     } ],
     "SHARED_SCOPE" : [ ]

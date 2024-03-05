@@ -20,7 +20,7 @@
     },
     "deviceProfileId" : {
       "entityType" : "DEVICE_PROFILE",
-      "id" : "23ea0b80-d73a-11ee-880e-ed784018c015"
+      "id" : "a14d5420-da81-11ee-880e-ed784018c015"
     },
     "externalId" : null,
     "firmwareId" : null,
@@ -32,7 +32,7 @@
     "name" : "CFE",
     "ownerId" : null,
     "softwareId" : null,
-    "type" : "CPM 20"
+    "type" : "CFE_CPM"
   },
   "credentials" : {
     "credentialsId" : "gIXekZfDpBnWgfzCPM00",
@@ -42,11 +42,11 @@
   "relations" : [ ],
   "attributes" : {
     "SERVER_SCOPE" : [ {
-      "booleanValue" : false,
+      "booleanValue" : true,
       "doubleValue" : null,
       "jsonValue" : null,
       "key" : "active",
-      "lastUpdateTs" : 1709387490738,
+      "lastUpdateTs" : 1709594909595,
       "longValue" : null,
       "strValue" : null
     }, {
@@ -62,8 +62,8 @@
       "doubleValue" : null,
       "jsonValue" : null,
       "key" : "lastActivityTime",
-      "lastUpdateTs" : 1709386841591,
-      "longValue" : 1709386841391,
+      "lastUpdateTs" : 1709597582611,
+      "longValue" : 1709597581778,
       "strValue" : null
     } ],
     "SHARED_SCOPE" : [ ]

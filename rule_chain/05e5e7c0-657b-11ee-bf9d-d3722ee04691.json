@@ -1,0 +1,512 @@
+{
+  "entityType" : "RULE_CHAIN",
+  "entity" : {
+    "additionalInfo" : {
+      "description" : ""
+    },
+    "configuration" : null,
+    "debugMode" : false,
+    "externalId" : {
+      "entityType" : "RULE_CHAIN",
+      "id" : "05e5e7c0-657b-11ee-bf9d-d3722ee04691"
+    },
+    "firstRuleNodeId" : {
+      "entityType" : "RULE_NODE",
+      "id" : "dba36920-da81-11ee-880e-ed784018c015"
+    },
+    "id" : {
+      "entityType" : "RULE_CHAIN",
+      "id" : "05e5e7c0-657b-11ee-bf9d-d3722ee04691"
+    },
+    "name" : "Planta",
+    "root" : false,
+    "type" : "CORE"
+  },
+  "metaData" : {
+    "connections" : [ {
+      "fromIndex" : 0,
+      "toIndex" : 11,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 2,
+      "toIndex" : 1,
+      "type" : "Post attributes"
+    }, {
+      "fromIndex" : 2,
+      "toIndex" : 3,
+      "type" : "RPC Request from Device"
+    }, {
+      "fromIndex" : 2,
+      "toIndex" : 4,
+      "type" : "Other"
+    }, {
+      "fromIndex" : 2,
+      "toIndex" : 5,
+      "type" : "RPC Request to Device"
+    }, {
+      "fromIndex" : 2,
+      "toIndex" : 7,
+      "type" : "Post telemetry"
+    }, {
+      "fromIndex" : 6,
+      "toIndex" : 2,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 7,
+      "toIndex" : 8,
+      "type" : "True"
+    }, {
+      "fromIndex" : 8,
+      "toIndex" : 9,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 9,
+      "toIndex" : 10,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 9,
+      "toIndex" : 16,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 11,
+      "toIndex" : 12,
+      "type" : "Alarm Cleared"
+    }, {
+      "fromIndex" : 11,
+      "toIndex" : 12,
+      "type" : "Alarm Created"
+    }, {
+      "fromIndex" : 13,
+      "toIndex" : 14,
+      "type" : "True"
+    }, {
+      "fromIndex" : 15,
+      "toIndex" : 13,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 16,
+      "toIndex" : 17,
+      "type" : "Success"
+    } ],
+    "firstNodeIndex" : 6,
+    "nodes" : [ {
+      "additionalInfo" : {
+        "layoutX" : 1261,
+        "layoutY" : 275
+      },
+      "configuration" : {
+        "defaultTTL" : 0
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "db9d4ea0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Save Timeseries",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 712,
+        "layoutY" : 201
+      },
+      "configuration" : {
+        "scope" : "CLIENT_SCOPE",
+        "updateAttributesOnlyOnValueChange" : false
+      },
+      "configurationVersion" : 1,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "db9efc50-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Save Client Attributes",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 494,
+        "layoutY" : 309
+      },
+      "configuration" : {
+        "version" : 0
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "db9fbfa0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Message Type Switch",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.filter.TbMsgTypeSwitchNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 824,
+        "layoutY" : 383
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "jsScript" : "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);",
+        "tbelScript" : "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba05be0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Log RPC from Device",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbLogNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 823,
+        "layoutY" : 444
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "jsScript" : "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);",
+        "tbelScript" : "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba14640-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Log Other",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.action.TbLogNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 822,
+        "layoutY" : 507
+      },
+      "configuration" : {
+        "timeoutInSeconds" : 60
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba230a0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "RPC Call Request",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.rpc.TbSendRPCRequestNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 209,
+        "layoutY" : 307
+      },
+      "configuration" : {
+        "persistAlarmRulesState" : false,
+        "fetchAlarmRulesStateOnStart" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba36920-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Device Profile Node",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.profile.TbDeviceProfileNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 496,
+        "layoutY" : 214
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "return msg.AOK > 0;",
+        "tbelScript" : "return msg.temperature > 20;"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba40560-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "EsLecturaValida",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.filter.TbJsFilterNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "Este bloque filtra todas las variables que no se utilizan en los CPMs independientemente si se usa como medidor de Voltaje o Voltaje y Corriente. En un bloque posterior, se eliminan las variables que no son útiles para lectoras únicamente de Voltaje.",
+        "layoutX" : 500,
+        "layoutY" : 131
+      },
+      "configuration" : {
+        "fromMetadata" : false,
+        "keys" : [ "AOK", "VLLA", "P1", "P2", "P3", "PS", "Q1", "Q2", "Q3", "QS", "S1", "S2", "S3", "SS", "VUNBL", "IUNBL", "LOADT", "PDM", "QDM", "SDM", "I1DM", "I2DM", "I3DM", "IADM", "V12THD", "V23THD", "V31THD", "VATHD", "I1THD", "I2THD", "I3THD", "IATHD", "AEIMP", "AEEXP", "AETOT", "AENET", "REIMP", "REEXP", "RETOT", "RENET", "SETOT", "V12", "V23", "V31" ]
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba4c8b0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "limpiezaDatosCPMAdtek",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbDeleteKeysNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "Este bloque elimina los valores que son exclusivos para lectores de Voltaje y Corriente. Es decir, deja solo los datos que requiere un medidor de voltaje. Esto para un CPM Adtek ",
+        "layoutX" : 761,
+        "layoutY" : 130
+      },
+      "configuration" : {
+        "fromMetadata" : false,
+        "keys" : [ "FREQ", "I1", "I2", "I3", "IA", "IN", "PF1", "PF2", "PF3", "PFA", "PS", "SS", "AETOT" ]
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba53de0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "limpiezaDatosCPMSoloVoltaje",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbDeleteKeysNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 996,
+        "layoutY" : 229
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "\nfor(var llave in msg){\n    if (typeof msg[llave] === 'number')\n    msg[llave] = (msg[llave]/10).toFixed(2);\n}\n\nreturn {msg: msg, metadata: metadata, msgType: msgType};",
+        "tbelScript" : "function divisionEntre10(valor){\n    return valor/10;\n}\n\nfor(var llave in msg){\n    msg[llave] /= 10;\n}\n\nreturn {msg: msg, metadata: metadata, msgType: msgType};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba5b310-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "OLDAcondicionarValores",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1171,
+        "layoutY" : 361
+      },
+      "configuration" : {
+        "persistAlarmRulesState" : false,
+        "fetchAlarmRulesStateOnStart" : false
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba64f50-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "alarmas",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.profile.TbDeviceProfileNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1224,
+        "layoutY" : 455
+      },
+      "configuration" : {
+        "ruleChainId" : "15471840-65b9-11ee-bf9d-d3722ee04691"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba95c90-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Alarmas",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.flow.TbRuleChainInputNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 222,
+        "layoutY" : 492
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "jsScript" : "return msg.temperature > 20;",
+        "tbelScript" : "return metadata.ok == \"true\";"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dba9f8d0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Envia dato",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.filter.TbJsFilterNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 219,
+        "layoutY" : 573
+      },
+      "configuration" : {
+        "restEndpointUrlPattern" : "http://vw01.tkmecloud.io/api/v1/${tokenID}/telemetry",
+        "requestMethod" : "POST",
+        "useSimpleClientHttpFactory" : false,
+        "trimDoubleQuotes" : false,
+        "ignoreRequestBody" : false,
+        "enableProxy" : false,
+        "useSystemProxyProperties" : false,
+        "proxyScheme" : null,
+        "proxyHost" : null,
+        "proxyPort" : 0,
+        "proxyUser" : null,
+        "proxyPassword" : null,
+        "readTimeoutMs" : 0,
+        "maxParallelRequestsCount" : 0,
+        "headers" : {
+          "Content-Type" : "application/json"
+        },
+        "useRedisQueueForMsgPersistence" : false,
+        "trimQueue" : null,
+        "maxQueueSize" : null,
+        "credentials" : {
+          "type" : "anonymous"
+        }
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dbaabc20-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "VW01",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.rest.TbRestApiCallNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 216,
+        "layoutY" : 414
+      },
+      "configuration" : {
+        "scriptLang" : "TBEL",
+        "jsScript" : "return {msg: msg, metadata: metadata, msgType: msgType};",
+        "tbelScript" : "metadata.ok = false;\nif (metadata.deviceName == \"CFE\")\n{\n    metadata.tokenID = \"tkrhzuVfG9bHHc4CPM00\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"Entrada UPS 2\")\n{\n    metadata.tokenID = \"tkrhzuVfG9bHHc4CPM03\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"Entrada UPS 1\")\n{\n    metadata.tokenID = \"tkrhzuVfG9bHHc4CPM02\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"Salida UPS 1\")\n{\n    metadata.tokenID = \"tkrhzuVfG9bHHc4CPM04\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"Salida UPS 2\")\n{\n    metadata.tokenID = \"tkrhzuVfG9bHHc4CPM05\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"PE-PRECALENTADOR\")\n{\n    metadata.tokenID = \"dev_TKMECLOUD-DIESEL\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"TORRETA\")\n{\n    metadata.tokenID = \"dev_TKMECLOUD-TORRETA\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"Planta de emergencia\")\n{\n    metadata.tokenID = \"tkrhzuVfG9bHHc4CPM01\";\n    metadata.ok = true;\n}\nif (metadata.deviceName == \"Gateway Temp - Hum - Contacto.Seco\")\n{\n    metadata.tokenID = \"dev_TKMECLOUD-iBEACON\";\n    metadata.ok = true;\n}\nreturn {msg: msg, metadata: metadata, msgType: msgType};"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dbab5860-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Envia DEV TKME Demo PTL",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1039,
+        "layoutY" : 110
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "for(var llave in msg){\n    if (typeof msg[llave] === 'number')\n    msg[llave] = msg[llave]/10;\n}\nmsg.ESPLANTA = 1;\nreturn {msg: msg, metadata: metadata, msgType: msgType};",
+        "tbelScript" : ""
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dbabcd90-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "AcondicionarValores",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "description" : "",
+        "layoutX" : 1309,
+        "layoutY" : 113
+      },
+      "configuration" : {
+        "ruleChainId" : "4f703910-6e39-11ee-bf9d-d3722ee04691"
+      },
+      "configurationVersion" : 0,
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "dbac69d0-da81-11ee-880e-ed784018c015"
+      },
+      "name" : "Guardar datos",
+      "ruleChainId" : null,
+      "singletonMode" : false,
+      "type" : "org.thingsboard.rule.engine.flow.TbRuleChainInputNode"
+    } ],
+    "ruleChainConnections" : null
+  },
+  "relations" : [ ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ ]
+  }
+}
